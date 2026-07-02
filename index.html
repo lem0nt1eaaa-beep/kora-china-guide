@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KORA 是什么？怎么用？—— 中文入门指南</title>
-<meta name="description" content="一份用中文写给中国用户的 KORA 介绍：它是什么、能做什么、怎么在 Telegram 上开始使用。">
+<title>KORA 是什么？怎么用？—— 中文详解指南</title>
+<meta name="description" content="一份用中文写给中国用户的 KORA 详细介绍：它是什么、解决什么问题、适合谁、怎么在 Telegram 上一步步用起来，附使用技巧与安全提醒。">
 <style>
   :root{
     --bg:#0f0f13;
@@ -30,7 +30,7 @@
 
   header.hero{
     position:relative;
-    padding:90px 20px 70px;
+    padding:90px 20px 50px;
     text-align:center;
     background:
       radial-gradient(600px 300px at 50% -10%, rgba(255,90,54,0.25), transparent 60%),
@@ -95,8 +95,35 @@
   }
   .btn-ghost:hover{border-color:#454552;}
 
-  main{padding:60px 0 40px;}
-  section{margin-bottom:64px;}
+  /* table of contents */
+  nav.toc{
+    max-width:860px;
+    margin:0 auto;
+    padding:16px 20px 0;
+  }
+  nav.toc ul{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    list-style:none;
+    padding:0;
+    margin:0;
+    justify-content:center;
+  }
+  nav.toc a{
+    display:inline-block;
+    font-size:.82rem;
+    color:var(--text-dim);
+    text-decoration:none;
+    padding:7px 12px;
+    border:1px solid var(--border);
+    border-radius:999px;
+    transition:border-color .15s, color .15s;
+  }
+  nav.toc a:hover{border-color:var(--accent);color:var(--text);}
+
+  main{padding:50px 0 40px;}
+  section{margin-bottom:64px;scroll-margin-top:20px;}
   .eyebrow{
     text-transform:uppercase;
     font-size:12px;
@@ -106,6 +133,7 @@
     margin-bottom:10px;
   }
   h2{font-size:1.55rem;margin:0 0 16px;font-weight:800;}
+  h3.sub{font-size:1.1rem;margin:28px 0 14px;font-weight:700;color:var(--text);}
   p{color:var(--text-dim);font-size:1rem;margin:0 0 14px;}
   strong{color:var(--text);}
 
@@ -128,7 +156,8 @@
   .quote-source a{color:var(--accent);text-decoration:none;}
 
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
-  @media(max-width:720px){.grid{grid-template-columns:1fr;}}
+  .grid.cols-2{grid-template-columns:repeat(2,1fr);}
+  @media(max-width:720px){.grid, .grid.cols-2{grid-template-columns:1fr;}}
   .card{
     background:var(--card);
     border:1px solid var(--border);
@@ -138,6 +167,17 @@
   .card .icon{font-size:1.8rem;margin-bottom:10px;display:block;}
   .card h3{font-size:1.02rem;margin:0 0 8px;font-weight:700;}
   .card p{font-size:.92rem;margin:0;}
+
+  .pill-row{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 6px;}
+  .pill{
+    background:var(--accent-soft);
+    color:var(--accent);
+    border:1px solid rgba(255,90,54,0.3);
+    padding:8px 16px;
+    border-radius:999px;
+    font-size:.88rem;
+    font-weight:600;
+  }
 
   .steps{counter-reset:step;list-style:none;padding:0;margin:0;}
   .steps li{
@@ -153,8 +193,7 @@
     content:counter(step);
     position:absolute;
     left:18px;
-    top:50%;
-    transform:translateY(-50%);
+    top:26px;
     width:30px;height:30px;
     border-radius:50%;
     background:linear-gradient(135deg, var(--accent), var(--accent2));
@@ -164,7 +203,8 @@
     display:flex;align-items:center;justify-content:center;
   }
   .steps h4{margin:0 0 6px;font-size:1rem;font-weight:700;color:var(--text);}
-  .steps p{margin:0;font-size:.92rem;}
+  .steps p{margin:0 0 8px;font-size:.92rem;}
+  .steps p:last-child{margin-bottom:0;}
   .steps code{
     background:var(--accent-soft);
     color:var(--accent);
@@ -172,6 +212,81 @@
     border-radius:6px;
     font-size:.9em;
   }
+
+  .tip-box{
+    background:rgba(255,90,54,0.06);
+    border:1px dashed rgba(255,90,54,0.4);
+    border-radius:12px;
+    padding:16px 18px;
+    font-size:.88rem;
+    color:var(--text-dim);
+    margin-top:10px;
+  }
+  .tip-box strong{color:var(--accent);}
+  .tip-box ul{margin:8px 0 0;padding-left:20px;}
+  .tip-box li{margin-bottom:6px;}
+
+  /* chat demo */
+  .chat-demo{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .bubble{
+    max-width:80%;
+    padding:12px 16px;
+    border-radius:16px;
+    font-size:.92rem;
+    color:var(--text);
+  }
+  .bubble.bot{
+    background:#25252f;
+    border:1px solid var(--border);
+    align-self:flex-start;
+    border-bottom-left-radius:4px;
+  }
+  .bubble.user{
+    background:linear-gradient(90deg, var(--accent), #ff7a3d);
+    color:#fff;
+    align-self:flex-end;
+    border-bottom-right-radius:4px;
+  }
+  .chat-demo-note{
+    font-size:.78rem;
+    color:var(--text-dim);
+    text-align:center;
+    margin-top:4px;
+    font-style:italic;
+  }
+
+  /* comparison table */
+  .compare{
+    width:100%;
+    border-collapse:collapse;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    overflow:hidden;
+    font-size:.9rem;
+  }
+  .compare th, .compare td{
+    padding:14px 16px;
+    text-align:left;
+    border-bottom:1px solid var(--border);
+  }
+  .compare th{
+    background:#22222b;
+    color:var(--text);
+    font-weight:700;
+  }
+  .compare td{color:var(--text-dim);}
+  .compare tr:last-child td{border-bottom:none;}
+  .compare td.highlight{color:var(--accent2);font-weight:600;}
+  .compare-wrap{overflow-x:auto;}
 
   .faq-item{
     border-bottom:1px solid var(--border);
@@ -190,6 +305,8 @@
     color:var(--text-dim);
   }
   .notice strong{color:var(--accent2);}
+  .notice ul{margin:10px 0 0;padding-left:20px;}
+  .notice li{margin-bottom:6px;}
 
   footer{
     border-top:1px solid var(--border);
@@ -205,10 +322,11 @@
 
 <header class="hero">
   <div class="wrap">
-    <span class="badge">KORA 中文入门指南</span>
-    <h1>KORA 是什么？<br><span>怎么在 Telegram 上开始用？</span></h1>
+    <span class="badge">KORA 中文详解指南</span>
+    <h1>KORA 是什么？<br><span>怎么在 Telegram 上用起来？</span></h1>
     <p class="hero-sub">
-      一份写给中国用户的非官方说明页 —— 用大白话讲清楚 KORA 这个 Telegram 机器人到底在做什么、适合谁、怎么上手。
+      一份写给中国用户的非官方详细说明页 —— 讲清楚 KORA 这个 Telegram 机器人在做什么、为什么会出现、
+      适合谁、怎么一步步上手，以及使用时要注意什么。
     </p>
     <div class="cta-row">
       <a class="btn btn-primary" href="https://t.me/Kora_china_bot" target="_blank" rel="noopener">
@@ -219,19 +337,42 @@
   </div>
 </header>
 
+<nav class="toc">
+  <ul>
+    <li><a href="#what">是什么</a></li>
+    <li><a href="#why">为什么出现</a></li>
+    <li><a href="#who">适合谁</a></li>
+    <li><a href="#scenarios">能用来做什么</a></li>
+    <li><a href="#howto">怎么用</a></li>
+    <li><a href="#demo">对话示意</a></li>
+    <li><a href="#tips">小贴士 &amp; 安全</a></li>
+    <li><a href="#compare">对比</a></li>
+    <li><a href="#faq">常见问题</a></li>
+  </ul>
+</nav>
+
 <main class="wrap">
 
   <section id="what">
     <div class="eyebrow">KORA 是什么</div>
     <h2>一个「帮你在中国找对人」的 Telegram 机器人</h2>
     <p>
-      KORA（在 Telegram 上的账号是 <strong>@Kora_china_bot</strong>）是一个通过 Telegram 聊天来使用的产品。
+      KORA（在 Telegram 上的账号是 <strong>@Kora_china_bot</strong>）是一个通过 Telegram 聊天来使用的产品，
+      不需要额外下载 App，加好友、点开始对话就能用。
       根据它在 Telegram 上公开展示的官方简介，KORA 给自己的定位是：
     </p>
     <div class="quote-card">
       "在中国的朋友 —— 帮你连接真正懂行的人：大厨、设计师、这座城市里最会玩的那群人。"
       <div class="en">原文："Your friend in China — connects you with the people who actually know: chefs, designers, the cool kids in town."</div>
-      <div class="quote-source">来源：Telegram 机器人主页 <a href="https://t.me/Kora_china_bot" target="_blank" rel="noopener">t.me/Kora_china_bot</a>（本页内容基于该公开简介整理）</div>
+      <div class="quote-source">来源：Telegram 机器人主页 <a href="https://t.me/Kora_china_bot" target="_blank" rel="noopener">t.me/Kora_china_bot</a>（本页内容基于该公开简介整理，本页作者未能找到 KORA 的独立官网）</div>
+    </div>
+    <p>
+      拆开这句简介看，有三个关键词值得注意：
+    </p>
+    <div class="pill-row">
+      <span class="pill">朋友 = 人的连接，不是信息罗列</span>
+      <span class="pill">真正懂行的人 = 圈内人，不是网红打卡点</span>
+      <span class="pill">在中国 = 聚焦本地生活方式与圈子</span>
     </div>
     <p>
       简单说，KORA 不是一个"查攻略"的工具，更像是一个<strong>牵线人</strong>：它想解决的问题是——很多人（尤其是刚到中国、
@@ -240,7 +381,28 @@
     </p>
   </section>
 
-  <section>
+  <section id="why">
+    <div class="eyebrow">背景</div>
+    <h2>为什么会出现 KORA 这类产品？</h2>
+    <p>
+      要理解 KORA，可以从两个背景说起——一个是平台层面的，一个是需求层面的。
+    </p>
+    <h3 class="sub">1. Telegram 本身在往「AI 机器人」方向发力</h3>
+    <p>
+      Telegram 在 2026 年推出了 Bot API 的 Managed Bots（托管机器人）能力，让开发者甚至普通用户都能更低门槛地
+      在 Telegram 里搭建、运行 AI 驱动的智能体（agent）。这让"用聊天机器人完成一件具体的事"（比如帮你找人、
+      帮你订东西）在 Telegram 生态里变得越来越常见，KORA 就是这类"聊天即服务"机器人中的一个。
+    </p>
+    <h3 class="sub">2. 外国人在中国的"信息差"一直存在</h3>
+    <p>
+      对很多刚到中国、或者不熟悉本地语言和圈子的外国人来说，找到靠谱的本地推荐并不容易：大众点评、小红书这类
+      内容平台以中文和本地用户习惯为主，语言门槛和信息筛选成本都不低；而传统攻略网站的内容又容易同质化、
+      滞后或者充满广告。KORA 想做的，是用"人帮人"的方式补上这个信息差——不是给你一份榜单，而是直接把你和
+      本地圈子里的具体人连接起来。
+    </p>
+  </section>
+
+  <section id="who">
     <div class="eyebrow">适合谁用</div>
     <h2>这类人可能会觉得 KORA 有用</h2>
     <div class="grid">
@@ -259,31 +421,174 @@
         <h3>想把中国朋友介绍给外国朋友的人</h3>
         <p>如果你身边有外国朋友来中国，也可以把这个机器人推荐给他们，帮他们更快融入本地圈子。</p>
       </div>
+      <div class="card">
+        <span class="icon">🧭</span>
+        <h3>做跨文化交流 / 招待外宾的人</h3>
+        <p>比如接待海外客户、朋友来华访问，需要快速拿到"内行推荐"而不是自己临时做攻略的人。</p>
+      </div>
+      <div class="card">
+        <span class="icon">🎨</span>
+        <h3>本地的"懂行人"本身</h3>
+        <p>如果你自己就是大厨、设计师，或者某个圈子里说得上话的人，这类产品的另一面通常也需要"被连接"的本地人参与。</p>
+      </div>
+      <div class="card">
+        <span class="icon">🧑‍💻</span>
+        <h3>对 AI 聊天机器人产品感兴趣的人</h3>
+        <p>想看看 Telegram 上的 AI 机器人现在能做到什么程度，KORA 是一个可以直接体验的真实案例。</p>
+      </div>
     </div>
   </section>
 
-  <section>
+  <section id="scenarios">
+    <div class="eyebrow">能用来做什么</div>
+    <h2>根据官方定位，可以合理设想的使用场景</h2>
+    <p>
+      官方简介里明确提到的角色是"大厨、设计师、城里最会玩的那群人"，据此可以合理推测 KORA 可能覆盖、
+      但本页作者<strong>未经实测验证</strong>的场景大致包括：
+    </p>
+    <div class="grid cols-2">
+      <div class="card">
+        <span class="icon">🍽️</span>
+        <h3>吃得地道，不踩雷</h3>
+        <p>比如想知道"本地人自己会去吃的馆子"是哪家，而不是排名前列但游客扎堆的网红店。</p>
+      </div>
+      <div class="card">
+        <span class="icon">🛋️</span>
+        <h3>设计 / 买手店 / 艺术</h3>
+        <p>想找懂设计的人聊聊本地的展览、买手店、独立品牌，而不是被动刷小红书笔记。</p>
+      </div>
+      <div class="card">
+        <span class="icon">🌃</span>
+        <h3>了解本地年轻人在玩什么</h3>
+        <p>想知道这座城市"最会玩的那群人"平时去哪、关注什么，而不是导游手册上的标准行程。</p>
+      </div>
+      <div class="card">
+        <span class="icon">🗺️</span>
+        <h3>快速融入一座新城市</h3>
+        <p>刚搬到一个新城市，缺一个能问"接地气问题"的本地朋友时，用它当作起点。</p>
+      </div>
+    </div>
+    <div class="tip-box">
+      <strong>提醒：</strong>以上是根据 KORA 公开简介合理推测出的可能用途，并非官方逐条列出的功能清单。
+      具体能不能满足你的需求、覆盖了哪些城市，请以你实际在 <code>@Kora_china_bot</code> 对话中得到的回复为准。
+    </div>
+  </section>
+
+  <section id="howto">
     <div class="eyebrow">怎么用</div>
-    <h2>三步开始使用 KORA</h2>
+    <h2>手把手教程：从零开始用 KORA</h2>
     <ol class="steps">
       <li>
         <h4>第一步：安装并打开 Telegram</h4>
-        <p>KORA 运行在 Telegram 里，所以先确保手机或电脑上装了 Telegram App，并完成注册登录。</p>
+        <p>KORA 运行在 Telegram 里，所以先确保手机或电脑上装了 Telegram App（应用商店 / 官网都能下载），并完成注册登录。</p>
+        <p>如果你在中国大陆网络环境下使用 Telegram，可能需要能正常访问境外网络的方式，这一步和 KORA 本身无关，属于 Telegram 的通用使用前提。</p>
       </li>
       <li>
         <h4>第二步：搜索机器人账号</h4>
-        <p>在 Telegram 搜索框里输入 <code>@Kora_china_bot</code>，或直接点击本页顶部的按钮 / 链接
+        <p>在 Telegram 顶部搜索框里输入 <code>@Kora_china_bot</code>，或直接点击本页的按钮 / 链接
           <code>t.me/Kora_china_bot</code> 跳转过去。</p>
+        <p>进入页面后，你会看到 KORA 的头像、名称和那句官方简介，确认账号无误后再继续。</p>
       </li>
       <li>
         <h4>第三步：点击 Start，开始对话</h4>
-        <p>进入机器人对话页面后，点击底部的 <code>Start</code>（开始）按钮，像聊天一样告诉它你想找什么
-          （比如想吃的菜系、想了解的城市、想认识的行业），跟着它的引导继续对话即可。</p>
+        <p>点击对话框底部的 <code>Start</code>（开始）按钮，机器人通常会先发一条欢迎语，介绍自己能帮你做什么。</p>
+        <p>像正常聊天一样，直接用自然语言告诉它你想找什么——不需要输入特定指令或代码。</p>
+      </li>
+      <li>
+        <h4>第四步：说清楚你的需求</h4>
+        <p>尽量把场景说具体：你在哪座城市、想找什么类型的人或体验、大概什么时间。信息越具体，得到的回复通常越有针对性。</p>
+      </li>
+      <li>
+        <h4>第五步：跟进对话，确认细节</h4>
+        <p>根据机器人的引导继续回复，确认联系方式、时间地点等细节；涉及见面或线下活动时，按下文"安全提醒"里的建议多留一个心眼。</p>
       </li>
     </ol>
+    <div class="tip-box">
+      <strong>怎么提问效果更好：</strong>
+      <ul>
+        <li>说清楚<strong>城市</strong>：比如"我在上海"比"我在中国"更容易被理解。</li>
+        <li>说清楚<strong>类型偏好</strong>：比如"本帮菜""独立设计师品牌""livehouse"，比笼统的"好玩的地方"更容易匹配。</li>
+        <li>说清楚<strong>时间窗口</strong>：比如"这周末"，方便对方判断是否合适。</li>
+        <li>如果第一次回复不够精准，可以像聊天一样继续补充信息，而不用重新开始对话。</li>
+      </ul>
+    </div>
   </section>
 
-  <section>
+  <section id="demo">
+    <div class="eyebrow">对话示意</div>
+    <h2>大致会是什么样的对话？</h2>
+    <p>
+      下面这段<strong>不是真实对话记录</strong>，只是根据 KORA 的官方定位和常见的 Telegram 机器人交互方式，
+      画出的一个示意流程，帮助你提前有个大概预期：
+    </p>
+    <div class="chat-demo">
+      <div class="bubble bot">你好，我是 KORA 👋 想让我帮你连接谁？可以直接说说你在哪座城市、想找什么样的人或体验。</div>
+      <div class="bubble user">我在成都，想找本地人常去的、不是网红打卡的川菜馆</div>
+      <div class="bubble bot">明白～可以再告诉我大概预算和想吃的口味（比如偏辣 / 偏家常）吗？</div>
+      <div class="bubble user">中等预算，偏家常，最好老板本人就是懂行的大厨</div>
+      <div class="bubble bot">收到，我来帮你看看可以连接哪些人 / 去处，稍等～</div>
+    </div>
+    <p class="chat-demo-note">以上仅为示意，实际界面文案、交互方式以你在 @Kora_china_bot 中看到的为准。</p>
+  </section>
+
+  <section id="tips">
+    <div class="eyebrow">小贴士</div>
+    <h2>使用小贴士与安全提醒</h2>
+    <p>
+      因为 KORA 的核心是"把你连接到具体的人"，这和单纯看一篇攻略文章不太一样，涉及到与陌生人建立联系甚至线下见面，
+      多留意几点会更安心：
+    </p>
+    <div class="notice">
+      <strong>安全建议：</strong>
+      <ul>
+        <li>第一次和 KORA 连接的人交流时，优先选择公开、人多的场合见面，避免直接前往私人或偏僻地点。</li>
+        <li>不要在对话早期透露身份证号、住址、银行卡等敏感信息。</li>
+        <li>涉及付费（比如请对方带路、体验类活动）前，提前问清楚费用和支付方式，避免线下现金纠纷。</li>
+        <li>如果对方的言行让你感到不适或存在明显诈骗迹象，直接终止对话并考虑向 Telegram 举报。</li>
+        <li>这些是使用任何"陌生人社交 / 连接"类产品时的通用建议，并非说明 KORA 本身存在问题。</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="compare">
+    <div class="eyebrow">对比</div>
+    <h2>KORA 和其他找信息方式有什么不同</h2>
+    <div class="compare-wrap">
+      <table class="compare">
+        <thead>
+          <tr>
+            <th>方式</th>
+            <th>核心逻辑</th>
+            <th>典型局限</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>传统攻略网站 / App</td>
+            <td>汇总大量用户点评、排名榜单</td>
+            <td>信息同质化、容易有广告和刷榜内容</td>
+          </tr>
+          <tr>
+            <td>小红书 / 大众点评类内容平台</td>
+            <td>UGC 内容 + 算法推荐</td>
+            <td>以中文和本地用户习惯为主，外语用户使用门槛较高</td>
+          </tr>
+          <tr>
+            <td>找熟人 / 朋友介绍</td>
+            <td>基于真实信任关系的一手推荐</td>
+            <td>依赖你本身有没有对应的人脉圈子</td>
+          </tr>
+          <tr>
+            <td class="highlight">KORA</td>
+            <td class="highlight">用聊天机器人牵线，直接连接到"懂行的人"</td>
+            <td class="highlight">较新的产品形态，公开资料有限，实际效果需要自己体验验证</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="faq">
     <div class="eyebrow">常见问题</div>
     <h2>FAQ</h2>
     <div class="faq-item">
@@ -293,19 +598,32 @@
     <div class="faq-item">
       <h4>KORA 和其他"中国攻略类"App 有什么不同？</h4>
       <p>从官方简介看，KORA 强调的是"连接人"而不是"罗列信息"——目标是帮你对接到具体的懂行者（大厨、设计师等），
-        而不是给你一份榜单或攻略文章。</p>
+        而不是给你一份榜单或攻略文章，详见上方对比表。</p>
+    </div>
+    <div class="faq-item">
+      <h4>需要会说英语或者外语才能用吗？</h4>
+      <p>官方简介是英文表述，机器人交互语言、是否支持中文对话，本页作者未能验证，建议直接用你习惯的语言试着发一条消息，看看它如何回应。</p>
+    </div>
+    <div class="faq-item">
+      <h4>KORA 覆盖哪些城市？</h4>
+      <p>目前没有查到官方公开的城市列表，账号名中的 "china" 说明它的服务范围面向中国，具体到城市颗粒度需要在实际对话中确认。</p>
+    </div>
+    <div class="faq-item">
+      <h4>会不会有隐私或诈骗风险？</h4>
+      <p>任何"连接陌生人"性质的产品都存在一定风险，建议参考上方"使用小贴士与安全提醒"部分，保持基本的警惕心，不代表 KORA 本身被证实存在问题。</p>
     </div>
     <div class="faq-item">
       <h4>这个页面是 KORA 官方做的吗？</h4>
-      <p>不是。这是一个基于 KORA 在 Telegram 上公开展示的机器人简介整理制作的<strong>非官方中文说明页</strong>，
-        目的是帮中文用户更快看懂它是做什么的、怎么用。</p>
+      <p>不是。这是一个基于 KORA 在 Telegram 上公开展示的机器人简介、以及公开可查的行业背景信息整理制作的
+        <strong>非官方中文说明页</strong>，目的是帮中文用户更快看懂它是做什么的、怎么用，页面中所有推测性内容都已明确标注。</p>
     </div>
   </section>
 
   <section>
     <div class="notice">
       <strong>说明：</strong>由于 KORA 目前主要信息来源是它在 Telegram 上的公开机器人简介，暂未找到独立的官方网站，
-      本页内容基于该简介和一般 Telegram 机器人的使用方式整理而成，可能不完整或随官方更新而变化。
+      本页除官方简介原文外的场景推测、对话示意、背景分析等内容，均为基于公开信息的合理推断，并已在正文中明确标注，
+      不代表官方立场，也可能随 KORA 后续更新而变化。
       使用前建议以你在 <a href="https://t.me/Kora_china_bot" target="_blank" rel="noopener" style="color:var(--accent2)">@Kora_china_bot</a>
       对话中实际看到的内容为准。
     </div>
